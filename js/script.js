@@ -456,24 +456,24 @@ $('#cardContainer').on('click', '.removeBtn', function(){
     const id = $(this).parent().parent().parent().data('id');
     const card = $(this).parent().parent().parent();
     $.ajax({
-      url: `${url}/deleteItem/${id}`,
-      type: 'DELETE',
-      data: {
-          userID: sessionStorage.userID
-      },
-      success:function(response){
-          if(response == '401'){
-              alert(`401 error: you don't have permission to be here. Sorry. We don't make the rules.`);
-          } else {
-             card.remove();
-             showItems();
-          }
-      },
-      error:function(err) {
-        console.log(err);
-        console.log('something went wrong deleting the product');
-      }
-  });
+        url: `${url}/deleteItem/${id}`,
+        type: 'DELETE',
+        data: {
+            userID: sessionStorage.userID
+        },
+        success:function(response){
+            if(response == '401'){
+                alert(`401 error: you don't have permission to be here. Sorry. We don't make the rules.`);
+            } else {
+                card.remove();
+                showItems();
+            }
+        },
+        error:function(err) {
+            console.log(err);
+            console.log('something went wrong deleting the product');
+        }
+    });
 });
 // $('#cardContainer').on('click', '.removeBtn', function(){
 //     event.preventDefault();
@@ -532,20 +532,20 @@ $('#cardContainer').on('click', '.moreInfoBtn', function() {
 });
 
 $('#cardContainer').on('click','.buyBtn',function(){
-  console.log('clicked');
-  const id = $(this).parent().parent().parent().data('id');
-  console.log(id);
+    console.log('clicked');
+    const id = $(this).parent().parent().parent().data('id');
+    console.log(id);
     $.ajax({
-      url: `${url}/buyItem/${id}`,
-      type:'PATCH',
-      success:function(){
-        console.log('changing bought to true in backend');
-        showItems();
-      },
-      error: function(err){
-        console.log(err);
-        console.log('How embarassing, a database error! This never usually happens to me.');
-      }
+        url: `${url}/buyItem/${id}`,
+        type:'PATCH',
+        success:function(){
+            console.log('changing bought to true in backend');
+            showItems();
+        },
+        error: function(err){
+            console.log(err);
+            console.log('How embarassing, a database error! This never usually happens to me.');
+        }
     });
 });
 
