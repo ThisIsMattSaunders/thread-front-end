@@ -320,8 +320,8 @@ $('#addItemForm').on('submit', () => {
         formData.append('itemName', itemName.val());
         formData.append('itemDescription', itemDescription.val());
         formData.append('itemPrice', itemPrice.val());
-        formData.append('itemType', $('input[name=itemType]:checked').val());
-        formData.append('itemCondition', $('input[name=itemCondition]:checked').val());
+        formData.append('itemType', $('input[name="itemType"]:checked').val());
+        formData.append('itemCondition', $('input[name="itemCondition"]:checked').val());
         formData.append('itemImg', itemImg[0].files[0]);
         formData.append('userID', sessionStorage.userID);
 
@@ -393,7 +393,7 @@ $('#cardContainer').on('click', '.editBtn', function() {
             $('#itemDescriptionEdit').val(item.item_description);
             $('#itemPriceEdit').val(item.price);
             $('#itemIDEdit').val(item._id);
-            $("input[name=itemTypeEdit][value=" + item.clothing_type + "]").attr('checked', 'checked');
+            $("input[name=itemTypeEdit][value='" + item.clothing_type + "']").attr('checked', false);
             $("input[name=itemConditionEdit][value=" + item.condition + "]").attr('checked', 'checked');
         },
         error: function(err){
@@ -416,8 +416,11 @@ $('#editItemForm').submit(() => {
     let itemName = $('#itemNameEdit').val();
     let itemDescription = $('#itemDescriptionEdit').val();
     let itemPrice = $('#itemPriceEdit').val();
-    let itemType = $('input[name=itemTypeEdit]:checked').val();
-    let itemCondition = $('input[name=itemConditionEdit]:checked').val();
+    let itemType = $('input[name="itemTypeEdit"]:checked').val();
+    let itemCondition = $('input[name="itemConditionEdit"]:checked').val();
+
+    console.log(itemType);
+    console.log(itemCondition);
 
     if ((itemName.length != 0) && (itemDescription.length != 0) && (itemPrice.length != 0) ) {
         $.ajax({
@@ -434,11 +437,15 @@ $('#editItemForm').submit(() => {
             success: function(item){
                 console.log(item);
                 $('#editModal').modal('hide');
+                console.log(itemCondition);
+                console.log(itemType);
                 showItems();
             },
             error: function(err){
                 console.log(err);
                 console.log('How embarrassing, a database error! This never usually happens to me.');
+                console.log(itemCondition);
+                console.log(itemType);
             }
         });
     } else {

@@ -13,7 +13,8 @@ module.exports = function(grunt){
         csslint: {
           strict: {
             options: {
-              import: 2
+              import: 2,
+              quiet: true
             },
             src: ['css/style.css']
           },
